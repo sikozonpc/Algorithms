@@ -1,5 +1,5 @@
 ## Frequency Counters
--RESUME: More loops is way better than less loops insise loops!
+-RESUME: More loops is way better than less loops inside loops!
 
 - Uses sets to collect values/frequencies of values.;
 - Avoid the need for O(n^2);
