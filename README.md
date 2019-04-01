@@ -3,7 +3,7 @@
 - Avoid the need for O(n^2);
 
 ```js
-// Naive Freqeuncy counter O(n^2)
+// Naive Frequency counter O(n^2)
 function same( arr1, arr2 ) {
     let output;
 
