@@ -165,3 +165,44 @@ function max_sum_refratored( arr, n) {
 
 console.log( max_sum_refratored([1,2,5,2,8,1,5], 4) );
 ```
+
+### Divide and Conquer 
+
+- This pattern involves dividing a dataset into smaller chunks and then repeatign the process with a subset of data.
+
+- Tremendously decreases Time Complexity.
+
+```js
+// Naive solution for a search: Linear seach
+function search(arr, val) {
+    for(let i=0; i < arr.length; i++) {
+        if(arr[i] === val) {
+            return i;
+        }
+    }
+    return -1;
+}
+```
+```js
+// Best solution for a search: Binary Search O(logn)
+function binarySearch(arr, val) {
+    let min = 0;
+    let max = arr.length - 1;
+
+    while(min <= max) {
+        let middle = Math.floor((min+max)/2);
+        let currElem = arr[middle];
+
+        if (currElem < val) {
+            min = middle + 1;
+        }
+        else if (currElem > val) {
+            max = middle +1;
+        }
+        else {
+            return middle;
+        }
+    }
+    return -1;
+}
+```
