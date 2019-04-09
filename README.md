@@ -206,3 +206,21 @@ function binarySearch(arr, val) {
     return -1;
 }
 ```
+
+### Recursion 
+
+```js
+// Recursion 
+function anyOddNumber(arr) {
+    // Base case
+    if (arr.length === 0) {
+        return false;
+    }
+    if( arr[0] % 2 === 1 ) {
+        return true;
+    }
+    console.log("arr:", arr)
+    return anyOddNumber( arr.slice(1, arr.lenght ) );
+}
+console.log( anyOddNumber( [3142, 5798, 6550, 5914] ) );
+```
