@@ -224,3 +224,28 @@ function anyOddNumber(arr) {
 }
 console.log( anyOddNumber( [3142, 5798, 6550, 5914] ) );
 ```
+
+- Tipical factorial example:
+
+```js
+function factorial(n) {
+    if(n === 1) return 1;
+
+    return  n * factorial(n-1);
+}
+```
+
+- Recursion helper function pattern:
+
+```js
+function outer(arr) {
+    let result = [];
+
+    function helper_rercursion(arr) {
+        ... modify the result inside here ...
+    }
+
+    helper_recursion(arr);
+    return result;
+}
+```
