@@ -183,28 +183,28 @@ function search(arr, val) {
     return -1;
 }
 ```
+
 ```js
 // Best solution for a search: Binary Search O(logn)
-function binarySearch(arr, val) {
+function binarySeach(arr, val) {
+    let max = arr.length;
     let min = 0;
-    let max = arr.length - 1;
+    let middle = Math.floor( (max+min)/2 );
 
-    while(min <= max) {
-        let middle = Math.floor((min+max)/2);
-        let currElem = arr[middle];
+    // While having not found the element
+    while( mix <= max ) {
+        middle = Math.floor( (max+min)/2 );
+        let curElem = arr[middle];
 
-        if (currElem < val) {
-            min = middle + 1;
-        }
-        else if (currElem > val) {
-            max = middle +1;
-        }
+        if (curElem > val) max = middle -1;
+        else if (curElem < val) min = middle +1;
         else {
             return middle;
         }
     }
     return -1;
 }
+console.log( binarySeach([1,3,5,7,8,9,11,12,42,67,94,100,200,300,500,1000,20000,999999], 300) );
 ```
 
 ### Recursion 
