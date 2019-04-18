@@ -306,3 +306,59 @@ console.log(stringSearch("lorie loled", "lol"));
 
 ```js
 ```
+
+# Sorting algorithms
+
+## Bubble Sort O(n^2)
+
+-   Probably the easiest to implement;
+-   At each loop of comparisions the highest value will "bubble up" to the top.
+
+```js
+function bubbleSort(arr) {
+	let temp = 0;
+
+	for (let i = 0; i < arr.length; i++) {
+		for (let j = 0; j < arr.length; j++) {
+			if (arr[j] > arr[j + 1]) {
+				// Swap
+				temp = arr[j + 1];
+				arr[j + 1] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+
+	return arr;
+}
+console.log(
+	bubbleSort([3, 5, 1, 76, 13, 1, 43, 100, 999, 32, 42, 246, 64, 5, 2, 87])
+);
+```
+
+-   However this version is "Dumber" version. It first loops trough all the values, even the sorted ones, and in the end it compares the highest with "undifined".
+
+-   So with this a aproach we can improve the performance quite a bit for larger arrays of data and nearly sorted ones too.
+
+```js
+function bubbleSort(arr) {
+	let temp = 0,
+		noSwaps = false;
+
+	// Number of iterations, also decreases as it sorts
+	for (let i = arr.length; i > 0; i--) {
+		noSwap = true;
+		for (let j = 0; j < i - 1; j++) {
+			if (arr[j] > arr[j + 1]) {
+				// Swap
+				noSwap = false;
+				temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+		if (noSwaps) break;
+	}
+	return arr;
+}
+```
