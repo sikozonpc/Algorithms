@@ -362,3 +362,25 @@ function bubbleSort(arr) {
 	return arr;
 }
 ```
+
+## Selection Sort O(n^2)
+
+-   Similar to bubble sort but the sorted data, in this case the smaller values are placed in the beggining of the array.
+
+-   Selects the minimum and stores it at the start, and next iteration the array is sorted.
+
+```js
+function selectionSort(arr) {
+	let min = 0;
+
+	for (let i = 0; i < arr.length; i++) {
+		min = i;
+		for (let j = i + 1; j < arr.length; j++) {
+			if (arr[min] >= arr[j]) min = j;
+		}
+		// Swap ES6 syntax, also only swaps if its not sorted already
+		if (i !== min) [arr[i], arr[min]] = [arr[min], arr[i]];
+	}
+	return arr;
+}
+```
