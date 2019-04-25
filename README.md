@@ -311,6 +311,8 @@ console.log(stringSearch("lorie loled", "lol"));
 
 ## Bubble Sort O(n^2)
 
+![](https://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif)
+
 -   Probably the easiest to implement;
 -   At each loop of comparisions the highest value will "bubble up" to the top.
 
