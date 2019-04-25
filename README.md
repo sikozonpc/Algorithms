@@ -369,7 +369,7 @@ function bubbleSort(arr) {
 
 -   Selects the minimum and stores it at the start, and next iteration the array is sorted.
 
-[]!(https://upload.wikimedia.org/wikipedia/commons/9/94/Selection-Sort-Animation.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/9/94/Selection-Sort-Animation.gif)
 ```js
 function selectionSort(arr) {
 	let min = 0;
