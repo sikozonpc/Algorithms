@@ -384,3 +384,73 @@ function selectionSort(arr) {
 	return arr;
 }
 ```
+
+### DataStructures
+
+## Singly Linked Lists
+
+-   Contains **head, tail and length propety** .
+-   Doesnt not keep track of each item, but only head and tail.
+-   Consists of **Nodes** and each one has a **value** and a **pointer** to another node or null
+
+![](https://codeforwin.org/wp-content/uploads/2015/09/Singly-linked-list.png)
+
+-   Good for Adding and removing, since they dont have indexes.
+
+```js
+class Node {
+	constructor(value) {
+		this.value = value;
+		this.next = null;
+	}
+}
+
+class SinglyLinkedList {
+	constructor() {
+		this.length = 0;
+		this.head = null;
+		this.tail = null;
+	}
+
+	push(value) {
+		const node = new Node(value);
+		if (this.head === null) {
+			this.head = node;
+			this.tail = node;
+		} else {
+			this.tail.next = node;
+			// Updating the new tail;
+			this.tail = node;
+		}
+		this.length++;
+		return this;
+	}
+
+	traverse() {
+		let curr = this.head;
+		while (curr.next !== null) {
+			console.log(curr.value);
+			curr = curr.next;
+		}
+	}
+
+	pop() {
+		if (!this.head) return undefined;
+
+		let curr = this.head;
+		let newTail = curr;
+		while (curr.next !== null) {
+			newTail = curr;
+			curr = curr.next;
+		}
+		this.tail = newTail;
+		this.tail.next = null;
+		this.length--;
+		if (this.length === 0) {
+			this.head = null;
+			this.tail = null;
+		}
+		return curr;
+	}
+}
+```
