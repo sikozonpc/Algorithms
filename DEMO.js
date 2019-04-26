@@ -340,4 +340,123 @@ function stringSearch(str, pattern) {
 	}
 	return counter;
 }
-console.log(stringSearch("lorie loled", "lol"));
+// console.log(stringSearch("lorie loled", "lol"));
+
+function bubbleSort(arr) {
+	let temp = 0,
+		noSwaps = false;
+
+	for (let i = arr.length; i > 0; i--) {
+		noSwaps = true;
+		for (let j = 0; j < i - 1; j++) {
+			if (arr[j] > arr[j + 1]) {
+				// Swap
+				noSwaps = false;
+				temp = arr[j + 1];
+				arr[j + 1] = arr[j];
+				arr[j] = temp;
+			}
+		}
+		// if there were no swaps then there wont be and it means the arr was nearly sorted
+		if (noSwaps) break;
+	}
+
+	return arr;
+}
+// console.log(bubbleSort([3, 5, 1, 76, 13, 1, 43, 100, 999, 32, 42, 246, 64, 5, 2, 87]));
+
+function selectionSort(arr) {
+	let min = 0;
+
+	for (let i = 0; i < arr.length; i++) {
+		min = i;
+		for (let j = i + 1; j < arr.length; j++) {
+			if (arr[min] >= arr[j]) min = j;
+		}
+		// Swap ES6 syntax, also only swaps if its not sorted already
+		if (i !== min) [arr[i], arr[min]] = [arr[min], arr[i]];
+	}
+	return arr;
+}
+/*console.log(
+	selectionSort([1, 3, 5, 76, 13, 1, 43, 100, 999, 32, 42, 246, 64, 5, 2, 87])
+);
+*/
+// Multiple pointer Pattern
+
+function fizzBuzz() {
+	let output = "";
+	for (let i = 1; i <= 100; i++) {
+		output = "";
+		output += i;
+		if (i % 3 === 0) output += "Fizz";
+		if (i % 5 === 0) output += "Buzz";
+		console.log(output);
+	}
+}
+
+// SINGLY LINKED LISTS
+class Node {
+	constructor(value) {
+		this.value = value;
+		this.next = null;
+	}
+}
+
+class SinglyLinkedList {
+	constructor() {
+		this.length = 0;
+		this.head = null;
+		this.tail = null;
+	}
+
+	push(value) {
+		const node = new Node(value);
+		if (this.head === null) {
+			this.head = node;
+			this.tail = node;
+		} else {
+			this.tail.next = node;
+			// Updating the new tail;
+			this.tail = node;
+		}
+		this.length++;
+		return this;
+	}
+
+	traverse() {
+		let curr = this.head;
+		while (curr.next !== null) {
+			console.log(curr.value);
+			curr = curr.next;
+		}
+	}
+
+	pop() {
+		if (!this.head) return undefined;
+
+		let curr = this.head;
+		let newTail = curr;
+		while (curr.next !== null) {
+			newTail = curr;
+			curr = curr.next;
+		}
+		this.tail = newTail;
+		this.tail.next = null;
+		this.length--;
+		if (this.length === 0) {
+			this.head = null;
+			this.tail = null;
+		}
+		return curr;
+	}
+}
+
+const list = new SinglyLinkedList();
+list.push(2);
+list.push(3);
+list.push(4);
+console.log(list.pop());
+console.log(list.pop());
+console.log(list.pop());
+console.log(list);
