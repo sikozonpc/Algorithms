@@ -311,6 +311,8 @@ console.log(stringSearch("lorie loled", "lol"));
 
 ## Bubble Sort O(n^2)
 
+![](https://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif)
+
 -   Probably the easiest to implement;
 -   At each loop of comparisions the highest value will "bubble up" to the top.
 
@@ -369,6 +371,7 @@ function bubbleSort(arr) {
 
 -   Selects the minimum and stores it at the start, and next iteration the array is sorted.
 
+![](https://upload.wikimedia.org/wikipedia/commons/9/94/Selection-Sort-Animation.gif)
 ```js
 function selectionSort(arr) {
 	let min = 0;
