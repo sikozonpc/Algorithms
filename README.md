@@ -389,6 +389,58 @@ function selectionSort(arr) {
 }
 ```
 
+## Merge Sort O(n logn)
+
+-   Divide and conquer aproach, it first divides into 1 sized arrays and then starts to **merge** them into one sorted.
+
+![](https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif)
+
+```js
+function mergeSort(arr) {
+	if (arr.length <= 1) return arr;
+
+	let mid = Math.floor(arr.length / 2);
+	let left = mergeSort(arr.slice(0, mid));
+	let right = mergeSort(arr.slice(mid));
+
+	return merge(left, right);
+}
+console.log(mergeSort([10, 24, 76, 73, 72, 1, 100, 3]));
+
+// accept 2 sorted arrays
+function merge(arr1, arr2) {
+	let output = [];
+	let left = 0;
+	let right = 0;
+	let iterate = true;
+
+	while (iterate) {
+		if (arr1[left] === arr2[right]) {
+			output.push(arr1[left], arr2[right]);
+			right++;
+			left++;
+		}
+		if (arr1[left] < arr2[right]) {
+			output.push(arr1[left]);
+			left++;
+		} else {
+			output.push(arr2[right]);
+			right++;
+		}
+		if (!arr1[left]) {
+			output.push(...arr2.slice(right, arr2.lenght));
+			iterate = false;
+		}
+		if (!arr2[right]) {
+			output.push(...arr1.slice(left, arr1.lenght));
+			iterate = false;
+		}
+	}
+
+	return output;
+}
+```
+
 # DataStructures
 
 ## Singly Linked Lists
