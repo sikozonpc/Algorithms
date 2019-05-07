@@ -510,3 +510,34 @@ class SinglyLinkedList {
 	}
 }
 ```
+
+## Others
+
+### Palindrome check
+
+```js
+// Palindrome check
+function palindrome(str) {
+	let reversedStr = str
+		.toLowerCase()
+		.split("")
+		.reverse()
+		.join("");
+	return reversedStr === str;
+}
+```
+
+### First duplicate
+
+```js
+function firstDuplicate(arr) {
+	let freq = {};
+
+	for (let val of arr) {
+		if (freq[val]) {
+			return val;
+		} else freq[val] = 1;
+	}
+	return -1;
+}
+```
