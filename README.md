@@ -448,6 +448,9 @@ function merge(arr1, arr2) {
 -   Contains **head, tail and length propety** .
 -   Doesnt not keep track of each item, but only head and tail.
 -   Consists of **Nodes** and each one has a **value** and a **pointer** to another node or null
+-   O(1) best case for inserting, add, remove.
+-   O(n) for searching and access.
+-   Not the best data structure for searching.
 
 ![](https://codeforwin.org/wp-content/uploads/2015/09/Singly-linked-list.png)
 
@@ -484,7 +487,7 @@ class SinglyLinkedList {
 
 	traverse() {
 		let curr = this.head;
-		while (curr.next !== null) {
+		while (curr) {
 			console.log(curr.value);
 			curr = curr.next;
 		}
@@ -508,7 +511,112 @@ class SinglyLinkedList {
 		}
 		return curr;
 	}
+
+	shift() {
+		if (!this.head) return undefined;
+		const oldHead = this.head;
+		this.head = oldHead.next;
+		this.length--;
+		if (this.length === 0) {
+			this.tail = null;
+		}
+		return oldHead;
+	}
+	unshift(value) {
+		const newHead = new Node(value);
+		if (!this.head) {
+			this.head = newHead;
+			this.tail = newHead;
+		} else {
+			const oldHead = this.head;
+			this.head = newHead;
+			this.head.next = oldHead;
+		}
+		this.length++;
+		return this;
+	}
+
+	get(index) {
+		if (this.length <= index || index < 0) return null;
+		let counter = 0;
+		let curr = this.head;
+		for (let i = 0; i <= index; i++) {
+			if (counter === index) return curr;
+			counter++;
+			curr = curr.next;
+		}
+		return null;
+	}
+	// Updates a value at specified index
+	set(index, value) {
+		if (index < 0 || !value) return false;
+
+		let node = this.get(index);
+		if (node) {
+			node.value = value;
+			return true;
+		}
+		return false;
+	}
+	// Inserts a value at the specified index, but not updating.
+	insert(index, value) {
+		if (index < 0 || index > this.length) return false;
+		if (index === this.length) {
+			this.push(value);
+			return true;
+		}
+		if (index === 0) {
+			this.unshift(value);
+			return true;
+		}
+
+		const newNode = new Node(value);
+		const prev = this.get(index - 1);
+		const curr = this.get(index);
+		newNode.next = curr;
+		prev.next = newNode;
+		this.length++;
+		return true;
+	}
+
+	remove(index) {
+		if (index > this.length || index < 0) return undefined;
+		if (index === this.length - 1) {
+			this.pop();
+			return true;
+		}
+		if (index === 0) {
+			this.shift();
+			return true;
+		}
+		const pre = this.get(index - 1);
+		const removed = pre.next;
+		pre.next = removed.next;
+		this.length--;
+		return removed;
+	}
+
+	reverse() {
+		let node = this.head;
+		this.head = this.tail;
+		this.tail = node;
+
+		// Important for setting the new tail to null
+		let pre = null;
+		let next;
+		// Loop trough length times the list
+		for (let i = 0; i < this.length; i++) {
+			next = node.next;
+			// reverse
+			node.next = pre;
+			// move foward one
+			pre = node;
+			node = next;
+		}
+		return this;
+	}
 }
+const list = new SinglyLinkedList();
 ```
 
 ## Others
