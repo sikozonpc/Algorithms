@@ -635,6 +635,21 @@ function palindrome(str) {
 }
 ```
 
+### Reverse a string
+
+```js
+function reverseStr(str) {
+	let out = "";
+
+	for (let i = str.length - 1; i >= 0; i--) {
+		out += str[i];
+	}
+
+	return out;
+}
+console.log(reverseStr("Tiago"));
+```
+
 ### First duplicate
 
 ```js
