@@ -664,3 +664,16 @@ function firstDuplicate(arr) {
 	return -1;
 }
 ```
+
+### Remove all duplicates
+
+```js
+function removeDuplicates(nums) {
+	let freq = [];
+
+	for (let num of nums) {
+		freq.includes(num) ? null : freq.push(num);
+	}
+	return freq.length;
+}
+```

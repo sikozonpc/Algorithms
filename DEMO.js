@@ -395,6 +395,53 @@ function fizzBuzz() {
 	}
 }
 
+// Merge Sort
+
+// accept 2 sorted arrays
+function merge(arr1, arr2) {
+	let output = [];
+	let left = 0;
+	let right = 0;
+	let iterate = true;
+
+	while (iterate) {
+		if (arr1[left] === arr2[right]) {
+			output.push(arr1[left], arr2[right]);
+			right++;
+			left++;
+		}
+		if (arr1[left] < arr2[right]) {
+			output.push(arr1[left]);
+			left++;
+		} else {
+			output.push(arr2[right]);
+			right++;
+		}
+		if (!arr1[left]) {
+			output.push(...arr2.slice(right, arr2.lenght));
+			iterate = false;
+		}
+		if (!arr2[right]) {
+			output.push(...arr1.slice(left, arr1.lenght));
+			iterate = false;
+		}
+	}
+
+	return output;
+}
+// console.log(merge([1, 10, 50, 100, 200, 300, 400, 450], [2, 14, 99, 100, 150, 190, 500]));
+
+function mergeSort(arr) {
+	if (arr.length <= 1) return arr;
+
+	let mid = Math.floor(arr.length / 2);
+	let left = mergeSort(arr.slice(0, mid));
+	let right = mergeSort(arr.slice(mid));
+	console.log(left, right);
+	return merge(left, right);
+}
+// console.log(mergeSort([10, 24, 76, 73, 72, 1, 100, 3, 20]));
+
 // SINGLY LINKED LISTS
 class Node {
 	constructor(value) {
@@ -426,7 +473,7 @@ class SinglyLinkedList {
 
 	traverse() {
 		let curr = this.head;
-		while (curr.next !== null) {
+		while (curr) {
 			console.log(curr.value);
 			curr = curr.next;
 		}
@@ -450,13 +497,285 @@ class SinglyLinkedList {
 		}
 		return curr;
 	}
+
+	shift() {
+		if (!this.head) return undefined;
+		const oldHead = this.head;
+		this.head = oldHead.next;
+		this.length--;
+		if (this.length === 0) {
+			this.tail = null;
+		}
+		return oldHead;
+	}
+	unshift(value) {
+		const newHead = new Node(value);
+		if (!this.head) {
+			this.head = newHead;
+			this.tail = newHead;
+		} else {
+			const oldHead = this.head;
+			this.head = newHead;
+			this.head.next = oldHead;
+		}
+		this.length++;
+		return this;
+	}
+
+	get(index) {
+		if (this.length <= index || index < 0) return null;
+		let counter = 0;
+		let curr = this.head;
+		for (let i = 0; i <= index; i++) {
+			if (counter === index) return curr;
+			counter++;
+			curr = curr.next;
+		}
+		return null;
+	}
+	// Updates a value at specified index
+	set(index, value) {
+		if (index < 0 || !value) return false;
+
+		let node = this.get(index);
+		if (node) {
+			node.value = value;
+			return true;
+		}
+		return false;
+	}
+	// Inserts a value at the specified index, but not updating.
+	insert(index, value) {
+		if (index < 0 || index > this.length) return false;
+		if (index === this.length) {
+			this.push(value);
+			return true;
+		}
+		if (index === 0) {
+			this.unshift(value);
+			return true;
+		}
+
+		const newNode = new Node(value);
+		const prev = this.get(index - 1);
+		const curr = this.get(index);
+		newNode.next = curr;
+		prev.next = newNode;
+		this.length++;
+		return true;
+	}
+
+	remove(index) {
+		if (index > this.length || index < 0) return undefined;
+		if (index === this.length - 1) {
+			this.pop();
+			return true;
+		}
+		if (index === 0) {
+			this.shift();
+			return true;
+		}
+		const pre = this.get(index - 1);
+		const removed = pre.next;
+		pre.next = removed.next;
+		this.length--;
+		return removed;
+	}
+
+	reverse() {
+		let node = this.head;
+		this.head = this.tail;
+		this.tail = node;
+
+		// Important for setting the new tail to null
+		let pre = null;
+		let next;
+		// Loop trough length times the list
+		for (let i = 0; i < this.length; i++) {
+			next = node.next;
+			// reverse
+			node.next = pre;
+			// move foward one
+			pre = node;
+			node = next;
+		}
+		return this;
+	}
 }
 
-const list = new SinglyLinkedList();
-list.push(2);
-list.push(3);
-list.push(4);
-console.log(list.pop());
-console.log(list.pop());
-console.log(list.pop());
-console.log(list);
+// const list = new SinglyLinkedList();
+
+// Palindrome check
+function palindrome(str) {
+	let reversedStr = str
+		.toLowerCase()
+		.split("")
+		.reverse()
+		.join("");
+	return reversedStr === str;
+}
+
+// console.log(palindrome("racecar"));
+
+function firstDuplicate(arr) {
+	let freq = {};
+
+	for (let val of arr) {
+		if (freq[val]) {
+			return val;
+		} else freq[val] = 1;
+	}
+	return -1;
+}
+// console.log(firstDuplicate([2, 1, 3, 5, 3, 2]));
+
+function hash(string, max) {
+	let hash = 0;
+	for (let i = 0; i < string.length; i++) {
+		hash += string.charCodeAt(i);
+	}
+	return hash % max;
+}
+
+class HashTable {
+	constructor() {
+		this.storageLimit = 4;
+		this.storage = [];
+	}
+
+	print() {
+		console.log(this.storage);
+	}
+	getHashCode(key) {
+		const hashCode = hash(key, this.storageLimit);
+		console.log(hash(key, this.storageLimit));
+		return hashCode;
+	}
+
+	add(key, val) {
+		const index = hash(key, this.storageLimit);
+
+		// There isn't that index on storage add it
+		if (!this.storage[index]) {
+			this.storage[index] = [[key, val]];
+		} else {
+			let inserted = false;
+			// Iterate the bucket
+			for (let i = 0; i < this.storage[index].length; i++) {
+				// If the key already exists update the value
+				if (this.storage[index][i][0] === key) {
+					this.storage[index][i][1] = val;
+					inserted = true;
+				}
+			}
+			if (inserted === false) {
+				this.storage[index].push([key, val]);
+			}
+		}
+	}
+}
+
+const person = {
+	firstName: "John",
+	lastName: "Doe",
+	id: 5566,
+	fullName: function() {
+		// console.log(this);
+		return this.firstName + " " + this.lastName;
+	},
+};
+function testFunc() {
+	const name = "Tiago";
+}
+
+//console.log(person.fullName());
+//console.log(testFunc());
+
+// Closures - inner function has access to outer var even when the function where it is
+// instanced is not active
+// Funcao interior tem acesso a uma variavel externa, mesmo quando esse scope exterior ja nao existe
+const add = (function() {
+	let counter = 0;
+	return function() {
+		counter++;
+		return counter;
+	};
+})();
+
+add();
+add();
+console.log(add());
+
+// Create arrays from Iterable like arrays
+// NOTE: Good to convert node lists to Arrays !!
+const strExm = "Ola meu nome é tiago.";
+// console.log(Array.from(strExm));
+
+// ASYNC
+
+function testFuncBrug() {
+	// setTimeout is ASYNC so bbbb will be printed 1st
+	setTimeout(() => console.log("aaaa"), 1000);
+	console.log("bbbb");
+}
+
+//testFuncBrug();
+
+// Find the maximum sub string in each string and return it.
+// if there isnt return undefined
+function alg(str1, str2) {
+	let out = "";
+	let arr = [];
+
+	for (let l of str1) {
+		let index = str1.indexOf(l);
+		// If the chars are the same
+		if (l === str2[index]) {
+			out += l;
+		} else {
+			// if there is a substring add to arr
+			if (out.length > 0) {
+				arr.push(out);
+			}
+			out = "";
+		}
+	}
+	console.log(arr);
+	// Compare and return If there is sub strings
+	let output = arr[0];
+	for (let i = 0; i < arr.length; i++) {
+		if (output.length > arr[i].length) output = arr[i];
+	}
+	if (output !== undefined) return output;
+
+	return undefined;
+}
+
+// console.log(alg("ABCDEFGTIAGO", "ZADPODDTIAGO"));
+
+function fizzBuzz12() {
+	for (let i = 1; i <= 100; i++) {
+		if (i % 3 === 0 && i % 5 === 0) {
+			console.log("FizzBuzz");
+		} else if (i % 3 === 0) {
+			console.log("Fizz");
+		} else if (i % 5 === 0) {
+			console.log("Buzz");
+		} else {
+			console.log(i);
+		}
+	}
+}
+console.log("-----------");
+// fizzBuzz12();
+var removeDuplicates = function(nums) {
+	let freq = [];
+
+	for (let num of nums) {
+		freq.includes(num) ? null : freq.push(num);
+	}
+	console.log(freq);
+	return freq.length;
+};
+
+removeDuplicates([1, 1, 2]);
