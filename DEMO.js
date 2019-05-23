@@ -768,14 +768,25 @@ function fizzBuzz12() {
 }
 console.log("-----------");
 // fizzBuzz12();
-var removeDuplicates = function(nums) {
-	let freq = [];
 
-	for (let num of nums) {
-		freq.includes(num) ? null : freq.push(num);
+// SLIDING WINDOW NAIVE APROACH
+function slidingWindow(arr, k) {
+	let tempSum = 0;
+	let maxSum = 0;
+
+	for (let i = 0; i < arr.length; i++) {
+		// i=0 -> j=0 | 0 < 2
+		// j++ -> i=0 -> j=1 | 1 < 2
+		for (let j = i; j < i + k; j++) {
+			tempSum += arr[j]; // tempSum = 1 , tempSum = 3
+		}
+
+		if (tempSum > maxSum) maxSum = tempSum;
+		tempSum = 0;
 	}
-	console.log(freq);
-	return freq.length;
-};
 
-removeDuplicates([1, 1, 2]);
+	return maxSum;
+}
+
+console.log(slidingWindow([1, 2, 3, 4, 2, 3, 1, 9, 8, 4, 1], 2));
+console.log(maxSubarraySum([1, 2, 3, 4, 2, 3, 1, 9, 8, 4, 1], 2));

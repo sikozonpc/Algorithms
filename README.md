@@ -107,28 +107,21 @@ function sumZeroPair(arr) {
 ### Naive Solution O(n^2):
 
 ```js
-function maxSubarraySum(arr, n) {
-	if (n > arr.length) return null;
+	let tempSum = 0;
+	let maxSum = 0;
 
-	let temp, sum;
-	// Edge case for negative number arrays
-	let maxSum = -Infinity;
+	for (let i = 0; i < arr.length; i++) {
+		// i=0 -> j=0 | 0 < 2
+		// j++ -> i=0 -> j=1 | 1 < 2
+		for (let j = i; j < i + k; j++) {
+			tempSum += arr[j]; // tempSum = 1 , tempSum = 3
+		}
 
-	for (let i = 0; i < arr.length - n + 1; i++) {
-		// Window pointer
-		temp = i;
-		sum = 0;
-		// Sum the window
-		for (let j = 0; j < n; j++) {
-			sum += arr[temp];
-			temp++;
-		}
-		if (sum > maxSum) {
-			maxSum = sum;
-		}
+		if (tempSum > maxSum) maxSum = tempSum;
+		tempSum = 0;
 	}
+
 	return maxSum;
-}
 ```
 
 ### Best solution O(n):
