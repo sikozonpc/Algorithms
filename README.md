@@ -197,31 +197,8 @@ function binarySeach(arr, val) {
 	}
 	return -1;
 }
-console.log(
-	binarySeach(
-		[
-			1,
-			3,
-			5,
-			7,
-			8,
-			9,
-			11,
-			12,
-			42,
-			67,
-			94,
-			100,
-			200,
-			300,
-			500,
-			1000,
-			20000,
-			999999,
-		],
-		300
-	)
-);
+
+console.log(binarySeach([1,3,5,7,8,9,11,12,42,67,94,100,200,300,500,1000,20000,999999,],300));
 ```
 
 ### Recursion
@@ -670,3 +647,44 @@ function removeDuplicates(nums) {
 	return freq.length;
 }
 ```
+
+## Trees
+
+![Tree](https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/200px-Binary_search_tree.svg.png)
+
+> Tree with Size 9, Depth of 3 and with a 3 as the Root
+
+To be a tree one must:
+
+- **acyclic**: Have no cycles/loops.
+- All nodes must be **connected**, and reachable trough one path.
+
+
+Root: is the first item of the tree
+Left and Right, are both sides of the tree
+
+#### Check if 2 trees are equal:
+
+> Pseudo code
+
+```js
+boolean sameTree(node root1, node root2) {
+	// Both are null, then they are the same
+	if (root1 == NULL && root2 == NULL) {
+		return TRUE
+	}
+	// One of them is null then, we can already discart
+	if (root1 == NULL || root2 == NULL) {
+		return FALSE
+	}
+
+	// Recursvly check left, and right sides
+	if(root1->data == root2->data
+		&& sameTree(root1->left,root2->left)
+			&& sameTree(root1->right, root2->right))
+				return TRUE
+}
+```
+
+### Binary Search Tree (BST)
+

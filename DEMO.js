@@ -298,31 +298,8 @@ function binarySeach(arr, val) {
 	}
 	return -1;
 }
-/*console.log(
-	binarySeach(
-		[
-			1,
-			3,
-			5,
-			7,
-			8,
-			9,
-			11,
-			12,
-			42,
-			67,
-			94,
-			100,
-			200,
-			300,
-			500,
-			1000,
-			20000,
-			999999,
-		],
-		300
-	)
-);*/
+/*console.log(binarySeach([1,3,5,7,8,9,11,12,42,67,94,100,200,300,500,1000,20000,999999,],300));
+*/
 
 //
 // Return the number of ocurences the pattern happens inside the string
@@ -679,7 +656,7 @@ const person = {
 	firstName: "John",
 	lastName: "Doe",
 	id: 5566,
-	fullName: function() {
+	fullName: function () {
 		// console.log(this);
 		return this.firstName + " " + this.lastName;
 	},
@@ -694,9 +671,9 @@ function testFunc() {
 // Closures - inner function has access to outer var even when the function where it is
 // instanced is not active
 // Funcao interior tem acesso a uma variavel externa, mesmo quando esse scope exterior ja nao existe
-const add = (function() {
+const add = (function () {
 	let counter = 0;
-	return function() {
+	return function () {
 		counter++;
 		return counter;
 	};
