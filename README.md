@@ -650,9 +650,11 @@ function removeDuplicates(nums) {
 
 ## Trees
 
+In computer science, a binary tree is a tree data structure in which each node has at most two children.
+
 ![Tree](https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/200px-Binary_search_tree.svg.png)
 
-> Tree with Size 9, Depth of 3 and with a 3 as the Root
+> Tree with Size 9, Depth/Height of 3 and with a 8 as the Root
 
 To be a tree one must:
 
@@ -685,6 +687,25 @@ boolean sameTree(node root1, node root2) {
 				return TRUE
 }
 ```
+
+How many Unlabeled Binary trees can be with `n` nodes ?
+```
+For n  = 1, there is only one tree
+   o
+
+For n  = 2, there are two trees
+   o      o
+  /        \  
+ o          o
+
+For n  = 3, there are five trees
+    o      o           o         o      o
+   /        \         /  \      /         \
+  o          o       o    o     o          o
+ /            \                  \        /
+o              o                  o      o
+```
+[source](https://www.geeksforgeeks.org/enumeration-of-binary-trees/)
 
 ### Binary Search Tree (BST)
 
